@@ -1,0 +1,77 @@
+# Visual Studio 2015/2017/2019 cache directory
+.vs/
+
+../.vs/
+
+# Visual Studio 2015/2017/2019 auto-generated files
+*.obj
+*.dll
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+ipch/
+obj/
+bin/
+TestResults/
+[Bb]uild/
+[Ll]og/
+[Tt]est[Rr]esult*/
+_PublishWebSites/
+*.Publish.xml
+*.pubxml
+*.deploy.*
+*.pubxml.user
+
+# NuGet Packages
+packages/
+*.nupkg
+*.pupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Visual Studio 2015/2017/2019 Backup Files
+*.[Bb]ak
+
+# Visual Studio Code workspace settings
+.vscode/
+
+# Microsoft Azure specific files
+App_Start/Project_Readme.html
