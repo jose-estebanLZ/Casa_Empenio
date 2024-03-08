@@ -31,8 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +50,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CasaEmpeñoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CasaEmpeñoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CasaEmpeñoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CasaEmpeñoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CasaEmpeñoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoProducto.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Producto.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoProducto.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoTransaccion.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoUsuario.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaccion.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\CasaEmpeñoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CasaEmpeñoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Models\CasaEmpeñoModel.edmx.diagram">
+      <DependentUpon>CasaEmpeñoModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\CasaEmpeñoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CasaEmpeñoModel.Context.cs</LastGenOutput>
+      <DependentUpon>CasaEmpeñoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CasaEmpeñoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CasaEmpeñoModel.edmx</DependentUpon>
+      <LastGenOutput>CasaEmpeñoModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
