@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CasaEmpeñoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CasaEmpeñoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EstadoProducto">
           <Key>
             <PropertyRef Name="EstadoProductoId" />
@@ -21,8 +21,9 @@
           <Property Name="EstadoProductoId" Type="int" />
           <Property Name="Nombre" Type="varchar" MaxLength="250" />
           <Property Name="FechaIngreso" Type="datetime2" Precision="7" />
-          <Property Name="ValorCalculado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CostoVenta" Type="decimal" Precision="18" Scale="2" />
           <Property Name="HoraDevolucion" Type="time" Precision="7" />
+          <Property Name="CostoCompra" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
@@ -154,8 +155,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CasaEmpeñoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -165,22 +165,7 @@
           </Key>
           <Property Name="EstadoProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK__Producto__Estado__3B75D760" FromRole="EstadoProducto" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="ProductoId" />
-          </Key>
-          <Property Name="ProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TipoProductoId" Type="Int32" />
-          <Property Name="EstadoProductoId" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="FechaIngreso" Type="DateTime" Precision="7" />
-          <Property Name="ValorCalculado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="HoraDevolucion" Type="Time" Precision="7" />
-          <NavigationProperty Name="EstadoProducto" Relationship="Self.FK__Producto__Estado__3B75D760" FromRole="Producto" ToRole="EstadoProducto" />
-          <NavigationProperty Name="TipoProducto" Relationship="Self.FK__Producto__TipoPr__3A81B327" FromRole="Producto" ToRole="TipoProducto" />
-          <NavigationProperty Name="Transaccion" Relationship="Self.FK__Transacci__Produ__412EB0B6" FromRole="Producto" ToRole="Transaccion" />
+          <NavigationProperty Name="Producto" Relationship="CasaEmpeñoModel.FK__Producto__Estado__3B75D760" FromRole="EstadoProducto" ToRole="Producto" />
         </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
@@ -188,7 +173,7 @@
           </Key>
           <Property Name="TipoProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK__Producto__TipoPr__3A81B327" FromRole="TipoProducto" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="CasaEmpeñoModel.FK__Producto__TipoPr__3A81B327" FromRole="TipoProducto" ToRole="Producto" />
         </EntityType>
         <EntityType Name="TipoTransaccion">
           <Key>
@@ -215,8 +200,8 @@
           <Property Name="ProductoId" Type="Int32" Nullable="false" />
           <Property Name="FechaHoraTransaccion" Type="DateTime" Precision="7" />
           <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK__Transacci__Produ__412EB0B6" FromRole="Transaccion" ToRole="Producto" />
           <NavigationProperty Name="TipoTransaccion" Relationship="Self.FK__Transacci__TipoT__403A8C7D" FromRole="Transaccion" ToRole="TipoTransaccion" />
+          <NavigationProperty Name="Producto" Relationship="CasaEmpeñoModel.FK__Transacci__Produ__412EB0B6" FromRole="Transaccion" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -229,42 +214,6 @@
           <Property Name="NombreCompleto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.FK__Usuario__TipoUsu__45F365D3" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
-        <Association Name="FK__Producto__Estado__3B75D760">
-          <End Role="EstadoProducto" Type="Self.EstadoProducto" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoProducto">
-              <PropertyRef Name="EstadoProductoId" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="EstadoProductoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Producto__TipoPr__3A81B327">
-          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="0..1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProducto">
-              <PropertyRef Name="TipoProductoId" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="TipoProductoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Transacci__Produ__412EB0B6">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ProductoId" />
-            </Principal>
-            <Dependent Role="Transaccion">
-              <PropertyRef Name="ProductoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Transacci__TipoT__403A8C7D">
           <End Role="TipoTransaccion" Type="Self.TipoTransaccion" Multiplicity="1" />
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
@@ -291,24 +240,11 @@
         </Association>
         <EntityContainer Name="CasaEmpeñoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EstadoProducto" EntityType="Self.EstadoProducto" />
-          <EntitySet Name="Producto" EntityType="Self.Producto" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" />
           <EntitySet Name="TipoTransaccion" EntityType="Self.TipoTransaccion" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Transaccion" EntityType="Self.Transaccion" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK__Producto__Estado__3B75D760" Association="Self.FK__Producto__Estado__3B75D760">
-            <End Role="EstadoProducto" EntitySet="EstadoProducto" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Producto__TipoPr__3A81B327" Association="Self.FK__Producto__TipoPr__3A81B327">
-            <End Role="TipoProducto" EntitySet="TipoProducto" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Transacci__Produ__412EB0B6" Association="Self.FK__Transacci__Produ__412EB0B6">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Transaccion" EntitySet="Transaccion" />
-          </AssociationSet>
           <AssociationSet Name="FK__Transacci__TipoT__403A8C7D" Association="Self.FK__Transacci__TipoT__403A8C7D">
             <End Role="TipoTransaccion" EntitySet="TipoTransaccion" />
             <End Role="Transaccion" EntitySet="Transaccion" />
@@ -317,7 +253,72 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="Producto" EntityType="CasaEmpeñoModel.Producto" />
+          <AssociationSet Name="FK__Producto__Estado__3B75D760" Association="CasaEmpeñoModel.FK__Producto__Estado__3B75D760">
+            <End Role="EstadoProducto" EntitySet="EstadoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__TipoPr__3A81B327" Association="CasaEmpeñoModel.FK__Producto__TipoPr__3A81B327">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacci__Produ__412EB0B6" Association="CasaEmpeñoModel.FK__Transacci__Produ__412EB0B6">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoId" />
+          </Key>
+          <Property Name="ProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoProductoId" Type="Int32" />
+          <Property Name="EstadoProductoId" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="7" />
+          <Property Name="CostoVenta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="HoraDevolucion" Type="Time" Precision="7" />
+          <Property Name="CostoCompra" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="EstadoProducto" Relationship="CasaEmpeñoModel.FK__Producto__Estado__3B75D760" FromRole="Producto" ToRole="EstadoProducto" />
+          <NavigationProperty Name="TipoProducto" Relationship="CasaEmpeñoModel.FK__Producto__TipoPr__3A81B327" FromRole="Producto" ToRole="TipoProducto" />
+          <NavigationProperty Name="Transaccion" Relationship="CasaEmpeñoModel.FK__Transacci__Produ__412EB0B6" FromRole="Producto" ToRole="Transaccion" />
+        </EntityType>
+        <Association Name="FK__Producto__Estado__3B75D760">
+          <End Type="CasaEmpeñoModel.EstadoProducto" Role="EstadoProducto" Multiplicity="0..1" />
+          <End Type="CasaEmpeñoModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoProducto">
+              <PropertyRef Name="EstadoProductoId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="EstadoProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__TipoPr__3A81B327">
+          <End Type="CasaEmpeñoModel.TipoProducto" Role="TipoProducto" Multiplicity="0..1" />
+          <End Type="CasaEmpeñoModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="TipoProductoId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacci__Produ__412EB0B6">
+          <End Type="CasaEmpeñoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="CasaEmpeñoModel.Transaccion" Role="Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -329,19 +330,6 @@
               <MappingFragment StoreEntitySet="EstadoProducto">
                 <ScalarProperty Name="EstadoProductoId" ColumnName="EstadoProductoId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Producto">
-            <EntityTypeMapping TypeName="CasaEmpeñoModel.Producto">
-              <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
-                <ScalarProperty Name="TipoProductoId" ColumnName="TipoProductoId" />
-                <ScalarProperty Name="EstadoProductoId" ColumnName="EstadoProductoId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="ValorCalculado" ColumnName="ValorCalculado" />
-                <ScalarProperty Name="HoraDevolucion" ColumnName="HoraDevolucion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -388,6 +376,20 @@
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="CasaEmpeñoModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="CostoCompra" ColumnName="CostoCompra" />
+                <ScalarProperty Name="HoraDevolucion" ColumnName="HoraDevolucion" />
+                <ScalarProperty Name="CostoVenta" ColumnName="CostoVenta" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EstadoProductoId" ColumnName="EstadoProductoId" />
+                <ScalarProperty Name="TipoProductoId" ColumnName="TipoProductoId" />
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -28,7 +28,7 @@ namespace CasaEmpeño.Controllers
             var userExists = _loginService.IsValidUser(user.Usuario, user.Contraseña);
             if (userExists)
             {
-                return Redirect("~/Producto/Index");
+                return Redirect("~/Producto/List");
             }
 
             ViewBag.Message = "Usuario y/o contraseña inválidos";

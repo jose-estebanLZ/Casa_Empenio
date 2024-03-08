@@ -33,6 +33,10 @@ namespace CasaEmpeño
             bundles.Add(new StyleBundle("~/bundles/bootstrap/css").Include(
                       "~/Vendor/bootstrap/dist/css/bootstrap.min.css", new CssRewriteUrlTransform()));
 
+            // Datetimepicker style
+            bundles.Add(new StyleBundle("~/bundles/datetimepicker/css").Include(
+                      "~/Vendor/datetimepicker/css/bootstrap-datetimepicker.min.css", new CssRewriteUrlTransform()));
+
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap/js").Include(
                       "~/Vendor/bootstrap/dist/js/bootstrap.min.js"));
@@ -48,6 +52,14 @@ namespace CasaEmpeño
             // jQuery Validation
             bundles.Add(new ScriptBundle("~/bundles/validation/js").Include(
                       "~/Vendor/jquery-validation/jquery.validate.min.js"));
+
+            // Datetimepicker
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker/js").Include(
+                      "~/Vendor/datetimepicker/js/bootstrap-datetimepicker.min.js"));
+
+            // Moment
+            bundles.Add(new ScriptBundle("~/bundles/moment/js").Include(
+                      "~/Vendor/datetimepicker/js/moment.min.js"));
         }
     }
 }

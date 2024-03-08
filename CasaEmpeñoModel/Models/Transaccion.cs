@@ -20,7 +20,7 @@ namespace CasaEmpeñoModel.Models
         public Nullable<System.DateTime> FechaHoraTransaccion { get; set; }
         public Nullable<decimal> Monto { get; set; }
     
-        public virtual Producto Producto { get; set; }
         public virtual TipoTransaccion TipoTransaccion { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }

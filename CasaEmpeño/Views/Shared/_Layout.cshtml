@@ -10,6 +10,7 @@
     <!-- Primary vendor style -->
     @Styles.Render("~/bundles/font-awesome/css")
     @Styles.Render("~/bundles/animate/css")
+    @Styles.Render("~/bundles/datetimepicker/css")
     @Styles.Render("~/bundles/bootstrap/css")
     @Styles.Render("~/bundles/peicon7stroke/css")
 
@@ -32,10 +33,12 @@
         @RenderBody()
         @RenderSection("ControlsSection", required: false)
     </div>
-    
+
 
     <!-- Section for main scripts render -->
     @Scripts.Render("~/bundles/jquery/js")
+    @Scripts.Render("~/bundles/moment/js")
+    @Scripts.Render("~/bundles/datetimepicker/js")
     @Scripts.Render("~/bundles/bootstrap/js")
     @Scripts.Render("~/bundles/homer/js")
 

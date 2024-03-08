@@ -25,8 +25,9 @@ namespace CasaEmpeñoModel.Models
         public Nullable<int> EstadoProductoId { get; set; }
         public string Nombre { get; set; }
         public Nullable<System.DateTime> FechaIngreso { get; set; }
-        public Nullable<decimal> ValorCalculado { get; set; }
+        public Nullable<decimal> CostoVenta { get; set; }
         public Nullable<System.TimeSpan> HoraDevolucion { get; set; }
+        public Nullable<decimal> CostoCompra { get; set; }
     
         public virtual EstadoProducto EstadoProducto { get; set; }
         public virtual TipoProducto TipoProducto { get; set; }

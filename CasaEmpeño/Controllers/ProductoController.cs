@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CasaEmpeñoModel.ViewModels;
+using CasaEmpeñoService.ProductService;
+using CasaEmpeñoService.ProductStatusService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +11,32 @@ namespace CasaEmpeño.Controllers
 {
     public class ProductoController : Controller
     {
-        // GET: Producto
-        public ActionResult Index()
+        private readonly ProductService _productService;
+
+        public ProductoController()
+        {
+            _productService = new ProductService();
+        }
+
+        public ActionResult List()
+        {          
+            return View();
+        }
+        
+        public ActionResult Product()
         {
             return View();
+        }
+
+        public void Add(ProductViewModel product)
+        {
+            var productId = _productService.Add(product);
+            _productService.AddTransaction(productId, 1);
+        }
+
+        public void AddTransaction(int productId, int transactionType)
+        {
+            _productService.AddTransaction(productId, transactionType);
         }
     }
 }

@@ -26,11 +26,11 @@ namespace CasaEmpeñoModel.Models
         }
     
         public virtual DbSet<EstadoProducto> EstadoProducto { get; set; }
-        public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<TipoProducto> TipoProducto { get; set; }
         public virtual DbSet<TipoTransaccion> TipoTransaccion { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Transaccion> Transaccion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     }
 }

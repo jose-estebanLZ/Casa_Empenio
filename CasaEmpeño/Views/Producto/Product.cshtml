@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Compra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3 class="text-center">Comprar Producto</h3>
+    <div class="row m-t-sm">
+        <div class="col-sm-6">
+            <label>Tipo</label>
+            <select class="form-control" id="inpTipo">
+                <option></option>
+            </select>
+            <small class="text-danger" id="reqTipo"></small>
+        </div>
+        <div class="col-sm-6">
+            <label>Estado</label>
+            <select class="form-control" id="inpEstado">
+                <option></option>
+            </select>
+            <small class="text-danger" id="reqEstado"></small>
+        </div>
+    </div>
+    <div class="row m-t-sm">
+        <div class="col-sm-6">
+            <label>Nombre</label>
+            <input type="text" class="form-control" id="inpNombre" />
+            <small class="text-danger" id="reqNombre"></small>
+        </div>
+        <div class="col-sm-6">
+            <h5>Fecha de Ingreso</h5>
+            <div class="input-group date" id="datetimepicker1">
+                <input type="text" class="form-control" id="inpFecha" />
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                </span>
+            </div>
+            <small class="text-danger" id="reqFecha"></small>
+        </div>
+    </div>
+    <div class="row m-t-sm">
+        <div class="col-sm-6">
+            <label>Costo</label>
+            <input type="number" class="form-control" id="inpCosto" />
+            <small class="text-danger" id="reqCosto"></small>
+        </div>
+        <div class="col-sm-6">
+            <h5>Hora de Devolución</h5>
+            <div class="input-group date" id="datetimepicker2">
+                <input type="text" class="form-control" id="inpDevolucion" />
+                <span class="input-group-addon">
+                    <span class="fa fa-clock-o"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-md">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <input type="button" class="btn btn-primary btn-block" onclick="buy()" value="Comprar" />
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datatables/css")
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/datatables/js")
+    @Scripts.Render("~/bundles/datatablesBootstrap/js")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY/MM/DD'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'HH:mm:ss'
+            });
+
+            LoadDataDropDown('@Url.Action("GetDropDownProductType", "TipoProducto")', 'inpTipo');
+            LoadDataDropDown('@Url.Action("GetDropDownProductStatus", "EstadoProducto")', 'inpEstado');
+        });
+
+        function buy() {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: true,
+                url: '@Url.Action("Add","Producto")',
+                data: {
+                    TipoProductoId: inpTipo.value,
+                    EstadoProductoId: inpEstado.value,
+                    Nombre: inpNombre.value,
+                    FechaIngreso: inpFecha.value,
+                    CostoCompra: inpCosto.value,
+                    HoraDevolucion: inpDevolucion.value
+                },
+                success: function (result) {
+                    alert("compra éxitosa")
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function LoadDataDropDown(url, dropdown) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    var options = $(`#${dropdown}`);
+                    $.each(data, function () {
+                        options.append($('<option />').val(this.Value).text(this.Text));
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}
+
+

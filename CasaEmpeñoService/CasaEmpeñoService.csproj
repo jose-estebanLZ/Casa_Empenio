@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoginService\LoginService.cs" />
+    <Compile Include="ProductService\ProductService.cs" />
+    <Compile Include="ProductStatusService\ProductStatusService.cs" />
+    <Compile Include="ProductTypeService\ProductTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,5 +57,6 @@
       <Name>CasaEmpeñoRepository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

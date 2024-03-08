@@ -88,6 +88,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ProductStatusViewModel.cs" />
+    <Compile Include="ViewModels\ProductTypeViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\CasaEmpeñoModel.edmx">

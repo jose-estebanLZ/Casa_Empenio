@@ -127,9 +127,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EstadoProductoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\TipoProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +239,9 @@
     <Content Include="Vendor\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Vendor\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="Vendor\bootstrap\dist\js\npm.js" />
+    <Content Include="Vendor\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Vendor\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Vendor\datetimepicker\js\moment.min.js" />
     <Content Include="Vendor\fontawesome\css\font-awesome.css" />
     <Content Include="Vendor\fontawesome\css\font-awesome.min.css" />
     <Content Include="Vendor\fontawesome\fonts\fontawesome-webfont.svg" />
@@ -412,11 +417,15 @@
     <Content Include="Vendor\metisMenu\package.json" />
     <Content Include="Vendor\metisMenu\README.md" />
     <Content Include="Views\Shared\_Layout_Blank.cshtml" />
-    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Producto\List.cshtml" />
+    <Content Include="Views\Producto\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\EstadoProducto\" />
+    <Folder Include="Views\TipoProducto\" />
+    <Folder Include="Views\Transaccion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
