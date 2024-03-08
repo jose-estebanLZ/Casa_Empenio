@@ -2,19 +2,14 @@
 </div>
 <div id="logo" class="light-version">
     <span>
-        Homer Theme
+        Casa de Empeño
     </span>
 </div>
 <nav role="navigation">
     <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
     <div class="small-logo">
-        <span class="text-primary">HOMER APP</span>
+        <span class="text-primary">Casa de Empeño</span>
     </div>
-    <form role="search" class="navbar-form-custom" method="post" action="#">
-        <div class="form-group">
-            <input type="text" placeholder="Search something special" class="form-control" name="search">
-        </div>
-    </form>
     <div class="mobile-menu">
         <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
             <i class="fa fa-chevron-down"></i>
@@ -22,20 +17,24 @@
         <div class="collapse mobile-navbar" id="mobile-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a class="" href="#">Link 1</a>
-                </li>
-                <li>
-                    <a class="" href="#">Link 1</a>
+                    <a href="@Url.Action("LogOut","Login")">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="navbar-right">
         <ul class="nav navbar-nav no-borders">
-            <li>
-                <a href="#">
-                    <i class="pe-7s-upload pe-rotate-90"></i>
+            <li class="dropdown">
+                <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
+                    <i class="pe-7s-user"></i>
                 </a>
+                <ul class="dropdown-menu hdropdown animated flipInX">
+                    <li>
+                        <a>
+                            @Html.ActionLink("Cerrar Sesión", "LogOut", "Login")
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

@@ -1,8 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <h3 class="text-center">Productos</h3>
+    <div class="row text-right">
+        <button class="btn btn-primary m-r-md">Comprar</button>
+    </div>
+    <div class="row m-t-sm">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table cellpadding="1" cellspacing="1" class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Precio</th>
+                            <th>Fecha Adquisición</th>
+                            <th>Hora de devolución</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 

@@ -34,5 +34,10 @@ namespace CasaEmpeño.Controllers
             ViewBag.Message = "Usuario y/o contraseña inválidos";
             return View();
         }
+
+        public ActionResult LogOut()
+        {
+            return Redirect("~/Login/Index");
+        }
     }
 }
