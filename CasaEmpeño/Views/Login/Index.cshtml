@@ -26,7 +26,7 @@
                 <div class="panel-body">
 
 
-                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
