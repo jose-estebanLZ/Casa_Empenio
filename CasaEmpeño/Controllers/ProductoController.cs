@@ -28,15 +28,16 @@ namespace CasaEmpeño.Controllers
             return View();
         }
 
+        public JsonResult GetGrid() => 
+            Json(_productService.GetGrid(), JsonRequestBehavior.AllowGet);
+
         public void Add(ProductViewModel product)
         {
             var productId = _productService.Add(product);
             _productService.AddTransaction(productId, 1);
         }
 
-        public void AddTransaction(int productId, int transactionType)
-        {
+        public void AddTransaction(int productId, int transactionType) => 
             _productService.AddTransaction(productId, transactionType);
-        }
     }
 }

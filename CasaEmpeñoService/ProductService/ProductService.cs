@@ -1,4 +1,5 @@
 ﻿using CasaEmpeñoModel.Models;
+using CasaEmpeñoModel.SPModels;
 using CasaEmpeñoModel.ViewModels;
 using CasaEmpeñoRepository.ProductoRepository;
 using CasaEmpeñoRepository.TransaccionRepository;
@@ -53,5 +54,7 @@ namespace CasaEmpeñoService.ProductService
 
             return _productRepository.Add(productModel);             
         }
+
+        public List<GetListProducts> GetGrid() => _productRepository.GetGrid();
     }
 }

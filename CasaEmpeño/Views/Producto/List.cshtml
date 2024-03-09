@@ -9,10 +9,10 @@
     <div class="row text-right">
         <button class="btn btn-primary m-r-md" onclick="buy()">Comprar</button>
     </div>
-    <div class="row m-t-sm">
+    <div class="row m-t m-r-sm m-l-sm">
         <div class="col-sm-12">
             <div class="table-responsive">
-                <table cellpadding="1" cellspacing="1" class="table">
+                <table cellpadding="1" cellspacing="1" class="table" id="tProducts">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -23,7 +23,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="tbProducts"></tbody>
                 </table>
             </div>
         </div>
@@ -39,8 +39,58 @@
     @Scripts.Render("~/bundles/datatablesBootstrap/js")
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        LoadGridData();
+    });
+
     function buy() {
        window.location.href = '@Url.Action("Product", "Producto")';
+    }
+
+    function LoadGridData() {
+        $.ajax({
+                type: 'POST',
+                cache: false,
+                async: true,
+                url: '@Url.Action("GetGrid", "Producto")',
+                data: {},
+            success: function (data) {
+                    data.forEach(row => {
+                        tbProducts.innerHTML +=
+                            `<tr> 
+                                <td>${row.Nombre}</td>        
+                                <td>${row.TipoProducto}</td>        
+                                <td>${row.Estado}</td>        
+                                <td>${row.FechaIngreso}</td>        
+                                <td>${row.HoraDevolucion}</td>        
+                                <td>
+                                    ${GetBtnAction(row.SePuedeDevolver, row.SePuedeVender)}
+                                </td>
+                            </tr>`;
+                    });
+
+                    $('#tProducts').dataTable({
+                        "iDisplayLength": 50,
+                        "order": [[3, "asc"]],
+                    });
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+    }
+
+    function GetBtnAction(sePuedeDevolver, sePuedeVender) {
+
+        if (sePuedeDevolver) {
+            return '<button class="btn btn-default" onclick="">Devolución</button>';
+        }
+
+        if (sePuedeVender) {
+            return '<button class="btn btn-primary" onclick="">Oferta</button>';
+        }
+
+        return '';
     }
 </script>
 }

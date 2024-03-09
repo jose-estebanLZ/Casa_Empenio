@@ -1,4 +1,5 @@
 ﻿using CasaEmpeñoModel.Models;
+using CasaEmpeñoModel.SPModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,16 @@ namespace CasaEmpeñoRepository.ProductoRepository
             {
                 context.Entry(product).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+            }
+        }
+
+        public List<GetListProducts> GetGrid()
+        {
+            using (var context = new CasaEmpeñoEntities())
+            {
+                return context.Database
+                    .SqlQuery<GetListProducts>("[dbo].[pGetListProducts]")
+                    .ToList();
             }
         }
     }

@@ -60,6 +60,18 @@ namespace CasaEmpeño
             // Moment
             bundles.Add(new ScriptBundle("~/bundles/moment/js").Include(
                       "~/Vendor/datetimepicker/js/moment.min.js"));
+
+            // Datatables
+            bundles.Add(new ScriptBundle("~/bundles/datatables/js").Include(
+                      "~/Vendor/datatables/media/js/jquery.dataTables.min.js"));
+
+            // Datatables bootstrap
+            bundles.Add(new ScriptBundle("~/bundles/datatablesBootstrap/js").Include(
+                      "~/Vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"));
+
+            // Datatables style
+            bundles.Add(new StyleBundle("~/bundles/datatables/css").Include(
+                      "~/Vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"));
         }
     }
 }
