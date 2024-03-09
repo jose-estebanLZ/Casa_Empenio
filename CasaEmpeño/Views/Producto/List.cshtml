@@ -57,14 +57,14 @@
             success: function (data) {
                     data.forEach(row => {
                         tbProducts.innerHTML +=
-                            `<tr> 
-                                <td>${row.Nombre}</td>        
-                                <td>${row.TipoProducto}</td>        
-                                <td>${row.Estado}</td>        
-                                <td>${row.FechaIngreso}</td>        
-                                <td>${row.HoraDevolucion}</td>        
+                            `<tr>
+                                <td>${row.Nombre}</td>
+                                <td>${row.TipoProducto}</td>
+                                <td>${row.Estado}</td>
+                                <td>${row.FechaIngreso}</td>
+                                <td>${row.HoraDevolucion}</td>
                                 <td>
-                                    ${GetBtnAction(row.SePuedeDevolver, row.SePuedeVender)}
+                                    ${GetProductAction(row.SePuedeDevolver, row.SePuedeVender, row.ProductoId)}
                                 </td>
                             </tr>`;
                     });
@@ -80,17 +80,21 @@
             });
     }
 
-    function GetBtnAction(sePuedeDevolver, sePuedeVender) {
+    function GetProductAction(sePuedeDevolver, sePuedeVender, productId) {
 
         if (sePuedeDevolver) {
             return '<button class="btn btn-default" onclick="">Devolución</button>';
         }
 
         if (sePuedeVender) {
-            return '<button class="btn btn-primary" onclick="">Oferta</button>';
+            return '<button class="btn btn-primary" onclick="ofter(' + productId + ')">Ofertar</button>';
         }
 
-        return '';
+        return '<label class="text-info">Vendido</label>';
+    }
+
+    function ofter(productId) {
+        window.location.href = '@Url.Action("Oferta", "Producto")?productId='  + productId;
     }
 </script>
 }

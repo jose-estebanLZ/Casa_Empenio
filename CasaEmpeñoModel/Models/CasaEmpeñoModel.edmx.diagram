@@ -9,14 +9,16 @@
         <EntityTypeShape EntityType="CasaEmpeñoModel.TipoProducto" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CasaEmpeñoModel.TipoTransaccion" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CasaEmpeñoModel.TipoUsuario" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasaEmpeñoModel.Transaccion" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CasaEmpeñoModel.Usuario" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
-        <AssociationConnector Association="CasaEmpeñoModel.FK__Transacci__TipoT__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="CasaEmpeñoModel.FK__Usuario__TipoUsu__45F365D3" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CasaEmpeñoModel.Producto" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="CasaEmpeñoModel.FK__Producto__Estado__3B75D760" />
         <AssociationConnector Association="CasaEmpeñoModel.FK__Producto__TipoPr__3A81B327" />
+        <EntityTypeShape EntityType="CasaEmpeñoModel.OfertaProducto" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="CasaEmpeñoModel.Transaccion" Width="1.5" PointX="5.25" PointY="1.75" />
+        <AssociationConnector Association="CasaEmpeñoModel.FK__OfertaPro__Produ__5CD6CB2B" />
         <AssociationConnector Association="CasaEmpeñoModel.FK__Transacci__Produ__412EB0B6" />
+        <AssociationConnector Association="CasaEmpeñoModel.FK__Transacci__TipoT__403A8C7D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

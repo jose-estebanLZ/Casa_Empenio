@@ -1,6 +1,7 @@
 ﻿using CasaEmpeñoModel.Models;
 using CasaEmpeñoModel.SPModels;
 using CasaEmpeñoModel.ViewModels;
+using CasaEmpeñoRepository.OfertaProductoRepository;
 using CasaEmpeñoRepository.ProductoRepository;
 using CasaEmpeñoRepository.TransaccionRepository;
 using System;
@@ -15,25 +16,72 @@ namespace CasaEmpeñoService.ProductService
     {
         private readonly ProductRepository _productRepository;
         private readonly TransactionRepository _transactionRepository;
+        private readonly ProductOfferRepository _productOfferRepository;
         public ProductService()
         {
             _productRepository = new ProductRepository();
             _transactionRepository = new TransactionRepository();
+            _productOfferRepository = new ProductOfferRepository();
         }
 
-        public void AddTransaction(int productId, int typeTransaction)
+        public void AddTransaction(int productId, int typeTransaction, decimal? amount = 0)
         {
             var product = _productRepository.Get(productId);
+
+            if(amount == 0)
+            {
+                amount = typeTransaction == 3 ? product.CostoVenta : product.CostoCompra;
+            }
 
             var transaction = new Transaccion()
             {
                 ProductoId = productId,
                 FechaHoraTransaccion = DateTime.Now,
-                Monto = typeTransaction == 3 ? product.CostoVenta : product.CostoCompra,
+                Monto = amount,
                 TipoTransaccionId = typeTransaction
             };
 
             _transactionRepository.Add(transaction);
+        }
+
+        public int AddProductOffer(ProductOfferViewModel productOffer)
+        {
+            var offer = new OfertaProducto()
+            {
+                ProductoId = productOffer.ProductoId,
+                NombreCliente = productOffer.NombreCliente,
+                Telefono = productOffer.Telefono,
+                Monto = productOffer.Monto
+            };
+
+            return _productOfferRepository.Add(offer);
+        }
+
+        public bool IsLargestOffer(int productOfferId, int productId)
+        {
+            var lstProductOffer = _productOfferRepository.GetOfferListByProductId(productId);
+
+            var maxOffer = lstProductOffer
+                .OrderByDescending(x => x.Monto)
+                .First();
+
+            return maxOffer.OfertaProductoId == productOfferId;
+        }
+
+        public void MakeSale(int productId)
+        {
+            var lstProductOffer = _productOfferRepository.GetOfferListByProductId(productId);
+
+            if (lstProductOffer.Count < 3)
+            {
+                return;
+            }
+
+            var maxOffer = lstProductOffer
+                .OrderByDescending(x => x.Monto)
+                .First();
+
+            AddTransaction(productId, 3, maxOffer.Monto);
         }
 
         public int Add(ProductViewModel product)

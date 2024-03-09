@@ -463,6 +463,7 @@
     <Content Include="Views\Shared\_Layout_Blank.cshtml" />
     <Content Include="Views\Producto\List.cshtml" />
     <Content Include="Views\Producto\Product.cshtml" />
+    <Content Include="Views\Producto\Oferta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,6 +68,9 @@
     <Compile Include="Models\EstadoProducto.cs">
       <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OfertaProducto.cs">
+      <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Producto.cs">
       <DependentUpon>CasaEmpeñoModel.tt</DependentUpon>
     </Compile>
@@ -89,6 +92,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPModels\GetListProducts.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ProductOfferViewModel.cs" />
     <Compile Include="ViewModels\ProductStatusViewModel.cs" />
     <Compile Include="ViewModels\ProductTypeViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />

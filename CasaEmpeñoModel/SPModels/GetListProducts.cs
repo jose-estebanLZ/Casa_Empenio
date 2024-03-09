@@ -8,7 +8,7 @@ namespace CasaEmpeñoModel.SPModels
 {
     public class GetListProducts
     {
-        public int ProductId { get; set; }
+        public int ProductoId { get; set; }
         public string Nombre { get; set; }
         public string TipoProducto { get; set; }
         public string Estado { get; set; }

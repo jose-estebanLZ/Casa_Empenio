@@ -1,0 +1,70 @@
+﻿@model int 
+@{
+    ViewBag.Title = "Oferta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3 class="text-center">Vender Producto</h3>
+    <div class="row m-t-sm">
+        <div class="col-sm-4">
+            <label>Nombre del Comprador</label>
+            <input type="text" class="form-control" id="inpNombre"/>
+            <small class="text-danger" id="reqNombre"></small>
+        </div>
+        <div class="col-sm-4">
+            <label>Número de teléfono</label>
+            <input type="number" class="form-control" id="inpTelefono" pattern="[0-9]{10}" />
+            <small class="text-danger" id="reqTelefono"></small>
+        </div>
+        <div class="col-sm-4">
+            <label>Monto</label>
+            <input type="number" class="form-control" id="inpMonto" />
+            <small class="text-danger" id="reqMonto"></small>
+        </div>
+    </div>
+    <div class="row m-t-md">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <input type="button" class="btn btn-primary btn-block" onclick="offer()" value="Finalizar" />
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datatables/css")
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/datatables/js")
+    @Scripts.Render("~/bundles/datatablesBootstrap/js")
+
+    <script type="text/javascript">
+        function offer() {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                async: true,
+                url: '@Url.Action("AddProductOffer", "Producto")',
+                data: {
+                    ProductoId: @Model,
+                    NombreCliente: inpNombre.value,
+                    Telefono: inpTelefono.value,
+                    Monto: inpMonto.value
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result.isMaxOffer) {
+                        alert(`Ofertado más alto: ${inpNombre.value}`);
+                    }                    
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+}
+
+

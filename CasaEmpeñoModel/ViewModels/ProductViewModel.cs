@@ -15,5 +15,6 @@ namespace CasaEmpeñoModel.ViewModels
         public DateTime? FechaIngreso { get; set; }
         public decimal? CostoCompra { get; set; }
         public TimeSpan? HoraDevolucion { get; set; }
+        public string Comentario { get; set; }
     }
 }

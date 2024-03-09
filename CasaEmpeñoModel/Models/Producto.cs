@@ -17,6 +17,7 @@ namespace CasaEmpeñoModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
+            this.OfertaProducto = new HashSet<OfertaProducto>();
             this.Transaccion = new HashSet<Transaccion>();
         }
     
@@ -31,6 +32,8 @@ namespace CasaEmpeñoModel.Models
     
         public virtual EstadoProducto EstadoProducto { get; set; }
         public virtual TipoProducto TipoProducto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OfertaProducto> OfertaProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }
     }

@@ -12,16 +12,14 @@ namespace CasaEmpeñoModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaccion
+    public partial class OfertaProducto
     {
-        public int TransaccionId { get; set; }
-        public int TipoTransaccionId { get; set; }
+        public int OfertaProductoId { get; set; }
         public int ProductoId { get; set; }
-        public Nullable<System.DateTime> FechaHoraTransaccion { get; set; }
+        public string NombreCliente { get; set; }
+        public string Telefono { get; set; }
         public Nullable<decimal> Monto { get; set; }
-        public string Comentario { get; set; }
     
         public virtual Producto Producto { get; set; }
-        public virtual TipoTransaccion TipoTransaccion { get; set; }
     }
 }

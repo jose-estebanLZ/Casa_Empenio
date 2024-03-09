@@ -28,6 +28,11 @@ namespace CasaEmpeño.Controllers
             return View();
         }
 
+        public ActionResult Oferta(int productId)
+        {
+            return View(productId);
+        }
+
         public JsonResult GetGrid() => 
             Json(_productService.GetGrid(), JsonRequestBehavior.AllowGet);
 
@@ -37,7 +42,17 @@ namespace CasaEmpeño.Controllers
             _productService.AddTransaction(productId, 1);
         }
 
-        public void AddTransaction(int productId, int transactionType) => 
-            _productService.AddTransaction(productId, transactionType);
+        public void AddTransaction(int productId, int transactionType, decimal amount = 0) => 
+            _productService.AddTransaction(productId, transactionType, amount);
+
+        public JsonResult AddProductOffer(ProductOfferViewModel productOffer)
+        {
+            var productOfferId = _productService.AddProductOffer(productOffer);
+            var isMaxOffer = _productService.IsLargestOffer(productOfferId, productOffer.ProductoId);
+            _productService.MakeSale(productOffer.ProductoId);
+
+            return Json(new { isMaxOffer = isMaxOffer }, JsonRequestBehavior.AllowGet);
+        }
+            
     }
 }
