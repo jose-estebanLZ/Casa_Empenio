@@ -16,5 +16,6 @@ namespace CasaEmpeñoModel.SPModels
         public string HoraDevolucion { get; set; }
         public bool SePuedeDevolver { get; set; }
         public bool SePuedeVender { get; set; }
+        public int? UltimaTransaccionId { get; set; }
     }
 }

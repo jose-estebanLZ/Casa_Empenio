@@ -30,6 +30,37 @@
     </div>
 </div>
 
+<div class="modal fade hmodal-info" id="mDevolucion" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Realizar devolución del producto</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="returnProductId" />
+                <div class="row m-t">
+                    <div class="col-md-12">
+                        <label>Motivo de devolución</label>
+                        <textarea class="form-control" rows="5" id="inpComment"></textarea>
+                        <small id="reqComment" class="text-danger"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-block" onclick="returnProduct()">Procesar devolución</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     @Styles.Render("~/bundles/datatables/css")
 }
@@ -47,7 +78,15 @@
        window.location.href = '@Url.Action("Product", "Producto")';
     }
 
+    var table;
     function LoadGridData() {
+        tbProducts.innerHTML = '';
+
+        if (table != null) {
+            table.clear();
+            table.destroy();
+        }
+
         $.ajax({
                 type: 'POST',
                 cache: false,
@@ -64,12 +103,12 @@
                                 <td>${row.FechaIngreso}</td>
                                 <td>${row.HoraDevolucion}</td>
                                 <td>
-                                    ${GetProductAction(row.SePuedeDevolver, row.SePuedeVender, row.ProductoId)}
+                                    ${GetProductAction(row.SePuedeDevolver, row.SePuedeVender, row.UltimaTransaccionId, row.ProductoId)}
                                 </td>
                             </tr>`;
                     });
 
-                    $('#tProducts').dataTable({
+                    table = $('#tProducts').DataTable({
                         "iDisplayLength": 50,
                         "order": [[3, "asc"]],
                     });
@@ -80,21 +119,58 @@
             });
     }
 
-    function GetProductAction(sePuedeDevolver, sePuedeVender, productId) {
+    function GetProductAction(sePuedeDevolver, sePuedeVender, ultimaTransaccionId, productId) {
 
         if (sePuedeDevolver) {
-            return '<button class="btn btn-default" onclick="">Devolución</button>';
+            return '<button class="btn btn-default" onclick="showModalReturnProduct('+ productId+')">Devolución</button>';
         }
 
         if (sePuedeVender) {
             return '<button class="btn btn-primary" onclick="ofter(' + productId + ')">Ofertar</button>';
         }
 
-        return '<label class="text-info">Vendido</label>';
+        if (ultimaTransaccionId == 2) {
+            return '<label class="text-info">Devuelto</label>';
+        }
+
+        if (ultimaTransaccionId == 3) {
+            return '<label class="text-success">Vendido</label>';
+        }
+
+        return '';
     }
 
     function ofter(productId) {
         window.location.href = '@Url.Action("Oferta", "Producto")?productId='  + productId;
+    }
+
+    function showModalReturnProduct(productId) {
+        inpComment.value = '';
+        returnProductId.value = productId;
+
+        $('#mDevolucion').modal('show');
+    }
+
+    function returnProduct() {
+        $.ajax({
+                type: 'POST',
+                cache: false,
+                async: true,
+                url: '@Url.Action("AddTransaction", "Producto")',
+                data: {
+                    productId: returnProductId.value,
+                    transactionType: 2,
+                    comment: inpComment.value
+                },
+            success: function (result) {
+                    LoadGridData();
+                    $('#mDevolucion').modal('hide');
+                    alert("Devolución éxitosa")
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
     }
 </script>
 }

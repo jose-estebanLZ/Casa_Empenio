@@ -42,8 +42,8 @@ namespace CasaEmpeño.Controllers
             _productService.AddTransaction(productId, 1);
         }
 
-        public void AddTransaction(int productId, int transactionType, decimal amount = 0) => 
-            _productService.AddTransaction(productId, transactionType, amount);
+        public void AddTransaction(int productId, int transactionType, decimal amount = 0, string comment = "") => 
+            _productService.AddTransaction(productId, transactionType, amount, comment);
 
         public JsonResult AddProductOffer(ProductOfferViewModel productOffer)
         {

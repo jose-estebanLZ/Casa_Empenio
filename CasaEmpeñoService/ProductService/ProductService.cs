@@ -24,7 +24,7 @@ namespace CasaEmpeñoService.ProductService
             _productOfferRepository = new ProductOfferRepository();
         }
 
-        public void AddTransaction(int productId, int typeTransaction, decimal? amount = 0)
+        public void AddTransaction(int productId, int typeTransaction, decimal? amount = 0, string comment = "")
         {
             var product = _productRepository.Get(productId);
 
@@ -38,7 +38,8 @@ namespace CasaEmpeñoService.ProductService
                 ProductoId = productId,
                 FechaHoraTransaccion = DateTime.Now,
                 Monto = amount,
-                TipoTransaccionId = typeTransaction
+                TipoTransaccionId = typeTransaction,
+                Comentario = comment
             };
 
             _transactionRepository.Add(transaction);
