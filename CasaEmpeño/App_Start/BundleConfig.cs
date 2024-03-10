@@ -72,6 +72,18 @@ namespace CasaEmpeño
             // Datatables style
             bundles.Add(new StyleBundle("~/bundles/datatables/css").Include(
                       "~/Vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"));
+
+            // ValidateInputs
+            bundles.Add(new ScriptBundle("~/bundles/validateInputs/js").Include(
+                      "~/Js/ValidateInputsEmpty.js"));
+
+            // Toastr
+            bundles.Add(new ScriptBundle("~/bundles/toastr/js").Include(
+                      "~/Vendor/toastr/build/toastr.min.js"));
+
+            // Toastr style
+            bundles.Add(new StyleBundle("~/bundles/toastr/css").Include(
+                      "~/Vendor/toastr/build/toastr.min.css"));
         }
     }
 }

@@ -145,6 +145,7 @@
     <Content Include="Icons\pe-icon-7-stroke\css\helper.css" />
     <Content Include="Icons\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
     <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Js\ValidateInputsEmpty.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
@@ -231,6 +232,14 @@
     <Content Include="Vendor\animate.css\source\zooming_exits\zoomOutRight.css" />
     <Content Include="Vendor\animate.css\source\zooming_exits\zoomOutUp.css" />
     <Content Include="Vendor\animate.css\source\_base.css" />
+    <Content Include="Vendor\bootstrap-tour\build\css\bootstrap-tour-standalone.css" />
+    <Content Include="Vendor\bootstrap-tour\build\css\bootstrap-tour-standalone.min.css" />
+    <Content Include="Vendor\bootstrap-tour\build\css\bootstrap-tour.css" />
+    <Content Include="Vendor\bootstrap-tour\build\css\bootstrap-tour.min.css" />
+    <Content Include="Vendor\bootstrap-tour\build\js\bootstrap-tour-standalone.js" />
+    <Content Include="Vendor\bootstrap-tour\build\js\bootstrap-tour-standalone.min.js" />
+    <Content Include="Vendor\bootstrap-tour\build\js\bootstrap-tour.js" />
+    <Content Include="Vendor\bootstrap-tour\build\js\bootstrap-tour.min.js" />
     <Content Include="Vendor\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Vendor\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Vendor\bootstrap\dist\css\bootstrap.css" />
@@ -418,6 +427,8 @@
     <Content Include="Vendor\metisMenu\src\metisMenu.js" />
     <Content Include="Vendor\slimScroll\jquery.slimscroll.js" />
     <Content Include="Vendor\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="Vendor\toastr\build\toastr.min.css" />
+    <Content Include="Vendor\toastr\build\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -463,6 +474,7 @@
     <Content Include="Views\Shared\_Layout_Blank.cshtml" />
     <Content Include="Views\Producto\List.cshtml" />
     <Content Include="Views\Producto\Product.cshtml" />
+    <Content Include="Vendor\toastr\build\toastr.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

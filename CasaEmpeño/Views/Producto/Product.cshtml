@@ -53,6 +53,7 @@
                     <span class="fa fa-clock-o"></span>
                 </span>
             </div>
+            <small class="text-danger" id="reqDevolucion"></small>
         </div>
     </div>
     <div class="row m-t-md">
@@ -66,11 +67,15 @@
 
 @section Styles {
     @Styles.Render("~/bundles/datatables/css")
+    @Styles.Render("~/bundles/toastr/css")
 }
 
 @section Scripts{
     @Scripts.Render("~/bundles/datatables/js")
     @Scripts.Render("~/bundles/datatablesBootstrap/js")
+    @Scripts.Render("~/bundles/validateInputs/js")
+    @Scripts.Render("~/bundles/toastr/js")
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -82,10 +87,26 @@
             });
 
             LoadDataDropDown('@Url.Action("GetDropDownProductType", "TipoProducto")', 'inpTipo');
-            LoadDataDropDown('@Url.Action("GetDropDownProductStatus", "EstadoProducto")', 'inpEstado');
+            LoadDataDropDown('@Url.Action("GetDropDownProductStatus", "EstadoProducto")', 'inpEstado');            
         });
 
+        toastr.options = {
+            "debug": false,
+            "newestOnTop": false,
+            "positionClass": "toast-top-center",
+            "closeButton": true,
+            "debug": false,
+            "toastClass": "animated fadeInDown",
+        };
+
         function buy() {
+            const arrReqInputs = ['inpTipo', 'inpEstado', 'inpNombre', 'inpFecha', 'inpCosto', 'inpDevolucion'];
+            const arrReqMsg = ['reqTipo', 'reqEstado', 'reqNombre', 'reqFecha', 'reqCosto', 'reqDevolucion'];
+
+            if (!ValidateRequiredInputs(arrReqInputs, arrReqMsg)) {
+                return;
+            }
+
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -100,7 +121,14 @@
                     HoraDevolucion: inpDevolucion.value
                 },
                 success: function (result) {
-                    alert("compra éxitosa")
+                    inpTipo.value = '';
+                    inpEstado.value = '';
+                    inpNombre.value = '';
+                    inpFecha.value = '';
+                    inpCosto.value = '';
+                    inpDevolucion.value = '';
+
+                    toastr.success('Compra éxitosa');
                 },
                 error: function (error) {
                     console.error(error);

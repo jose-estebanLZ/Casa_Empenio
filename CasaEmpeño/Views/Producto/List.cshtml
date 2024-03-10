@@ -102,16 +102,29 @@
 
 @section Styles {
     @Styles.Render("~/bundles/datatables/css")
+    @Styles.Render("~/bundles/toastr/css")
 }
 
 @section Scripts{
     @Scripts.Render("~/bundles/datatables/js")
     @Scripts.Render("~/bundles/datatablesBootstrap/js")
+    @Scripts.Render("~/bundles/validateInputs/js")
+    @Scripts.Render("~/bundles/toastr/js")
 
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function(){
         LoadGridData();
     });
+
+    toastr.options = {
+        "debug": false,
+        "newestOnTop": false,
+        "positionClass": "toast-top-center",
+        "closeButton": true,
+        "debug": false,
+        "toastClass": "animated fadeInDown",
+        "timeOut": 7000
+    };
 
     function buy() {
        window.location.href = '@Url.Action("Product", "Producto")';
@@ -190,6 +203,20 @@
     }
 
     function offer() {
+
+        const arrReqInputs = ['inpNombre', 'inpTelefono', 'inpMonto'];
+        const arrReqMsg = ['reqNombre', 'reqTelefono', 'reqMonto'];
+        
+        if (!ValidateRequiredInputs(arrReqInputs, arrReqMsg)) {
+            return;
+        }
+
+        if (!isValidPhoneNumber(inpTelefono.value)) {
+            toastr.error('El número de teléfono sólo debe contener números y ser de 10 digitos');
+            return;
+        }
+
+
         $.ajax({
             type: 'POST',
             cache: false,
@@ -203,8 +230,10 @@
             },
             success: function (result) {
                 if (result.isMaxOffer) {
-                    alert(`Ofertado más alto: ${inpNombre.value}`);
+                    toastr.info(`Ofertado más alto: ${inpNombre.value}`);
                 }
+
+                toastr.success('Oferta realizada con éxito');
 
                 LoadGridData();
                 $('#mOffer').modal('hide');
@@ -215,6 +244,10 @@
         });
     }
 
+    function isValidPhoneNumber(phone) {
+        return phone.length == 10 && !phone.includes(".");
+    }
+
     function showModalReturnProduct(productId) {
         inpComment.value = '';
         returnProductId.value = productId;
@@ -222,7 +255,14 @@
         $('#mDevolucion').modal('show');
     }
 
-    function returnProduct() {
+    function returnProduct() {        
+        const arrReqInputs = ['inpComment'];
+        const arrReqMsg = ['reqComment'];
+
+        if (!ValidateRequiredInputs(arrReqInputs, arrReqMsg)) {
+            return;
+        }
+
         $.ajax({
                 type: 'POST',
                 cache: false,
@@ -236,14 +276,14 @@
             success: function (result) {
                     LoadGridData();
                     $('#mDevolucion').modal('hide');
-                    alert("Devolución éxitosa")
+                    toastr.success('Devolución éxitosa');
                 },
                 error: function (error) {
                     console.error(error);
                 }
             });
     }
-</script>
+    </script>
 }
 
 
