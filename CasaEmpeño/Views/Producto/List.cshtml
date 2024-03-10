@@ -61,6 +61,45 @@
     </div>
 </div>
 
+<div class="modal fade hmodal-info" id="mOffer" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Oferta</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="offerProductId" />
+                <div class="row m-t-sm">
+                    <label>Nombre del Comprador</label>
+                    <input type="text" class="form-control" id="inpNombre" />
+                    <small class="text-danger" id="reqNombre"></small>
+                </div>
+                <div class="row m-t-sm">
+                    <label>Número de teléfono</label>
+                    <input type="number" class="form-control" id="inpTelefono" pattern="[0-9]{10}" />
+                    <small class="text-danger" id="reqTelefono"></small>
+                </div>
+                <div class="row m-t-sm">
+                    <label>Monto</label>
+                    <input type="number" class="form-control" id="inpMonto" />
+                    <small class="text-danger" id="reqMonto"></small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-block" onclick="offer()">Realizar Oferta</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     @Styles.Render("~/bundles/datatables/css")
 }
@@ -110,7 +149,7 @@
 
                     table = $('#tProducts').DataTable({
                         "iDisplayLength": 50,
-                        "order": [[3, "asc"]],
+                        "order": [[3, "desc"]],
                     });
                 },
                 error: function (error) {
@@ -126,7 +165,7 @@
         }
 
         if (sePuedeVender) {
-            return '<button class="btn btn-primary" onclick="ofter(' + productId + ')">Ofertar</button>';
+            return '<button class="btn btn-primary" onclick="showModalOfter(' + productId + ')">Ofertar</button>';
         }
 
         if (ultimaTransaccionId == 2) {
@@ -140,8 +179,40 @@
         return '';
     }
 
-    function ofter(productId) {
-        window.location.href = '@Url.Action("Oferta", "Producto")?productId='  + productId;
+    function showModalOfter(productId) {
+        inpNombre.value = '';
+        inpTelefono.value = '';
+        inpMonto.value = '';
+
+        offerProductId.value = productId;
+
+        $('#mOffer').modal('show');
+    }
+
+    function offer() {
+        $.ajax({
+            type: 'POST',
+            cache: false,
+            async: true,
+            url: '@Url.Action("AddProductOffer", "Producto")',
+            data: {
+                ProductoId: offerProductId.value,
+                NombreCliente: inpNombre.value,
+                Telefono: inpTelefono.value,
+                Monto: inpMonto.value
+            },
+            success: function (result) {
+                if (result.isMaxOffer) {
+                    alert(`Ofertado más alto: ${inpNombre.value}`);
+                }
+
+                LoadGridData();
+                $('#mOffer').modal('hide');
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
     }
 
     function showModalReturnProduct(productId) {

@@ -28,11 +28,6 @@ namespace CasaEmpeño.Controllers
             return View();
         }
 
-        public ActionResult Oferta(int productId)
-        {
-            return View(productId);
-        }
-
         public JsonResult GetGrid() => 
             Json(_productService.GetGrid(), JsonRequestBehavior.AllowGet);
 
