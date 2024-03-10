@@ -41,7 +41,7 @@ namespace CasaEmpeño.Controllers
             _productService.AddTransaction(productId, transactionType, amount, comment);
 
         public JsonResult AddProductOffer(ProductOfferViewModel productOffer)
-        {
+        {            
             var productOfferId = _productService.AddProductOffer(productOffer);
             var isMaxOffer = _productService.IsLargestOffer(productOfferId, productOffer.ProductoId);
             _productService.MakeSale(productOffer.ProductoId);

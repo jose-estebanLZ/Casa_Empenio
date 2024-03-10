@@ -166,6 +166,7 @@
                     });
                 },
                 error: function (error) {
+                    toastr.error(`Ocurrió un error: ${error.responseText}`);
                     console.error(error);
                 }
             });
@@ -239,6 +240,7 @@
                 $('#mOffer').modal('hide');
             },
             error: function (error) {
+                toastr.error(`Ocurrió un error: ${error.responseText}`);
                 console.error(error);
             }
         });
@@ -279,6 +281,7 @@
                     toastr.success('Devolución éxitosa');
                 },
                 error: function (error) {
+                    toastr.error(`Ocurrió un error: ${error.responseText}`);
                     console.error(error);
                 }
             });

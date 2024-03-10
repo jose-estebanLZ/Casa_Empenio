@@ -97,6 +97,7 @@
             "closeButton": true,
             "debug": false,
             "toastClass": "animated fadeInDown",
+            "timeOut": 7000
         };
 
         function buy() {
@@ -131,6 +132,7 @@
                     toastr.success('Compra éxitosa');
                 },
                 error: function (error) {
+                    toastr.error(`Ocurrió un error: ${error.responseText}`);
                     console.error(error);
                 }
             });
@@ -148,7 +150,8 @@
                     });
                 },
                 error: function (error) {
-                    console.log(error);
+                    toastr.error(`Ocurrió un error: ${error.responseText}`);
+                    console.error(error);
                 }
             });
         }

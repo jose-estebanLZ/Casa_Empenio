@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,22 @@ namespace CasaEmpeño
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+
+            var errorDetails = exception.Message;
+
+            string jsonResponse = JsonConvert.SerializeObject(errorDetails);
+
+            Response.Clear();
+            Response.StatusCode = 500;
+            Response.ContentType = "application/json";
+            Response.Write(jsonResponse);
+
+            Server.ClearError();
         }
     }
 }
