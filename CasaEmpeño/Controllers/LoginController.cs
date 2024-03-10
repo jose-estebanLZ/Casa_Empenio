@@ -28,6 +28,7 @@ namespace CasaEmpeño.Controllers
             var userExists = _loginService.IsValidUser(user.Usuario, user.Contraseña);
             if (userExists)
             {
+                Session["User"] = user.Usuario;
                 return Redirect("~/Producto/List");
             }
 
@@ -37,6 +38,7 @@ namespace CasaEmpeño.Controllers
 
         public ActionResult LogOut()
         {
+            Session.Remove("User");
             return Redirect("~/Login/Index");
         }
     }

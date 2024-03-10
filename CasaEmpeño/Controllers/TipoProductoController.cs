@@ -1,4 +1,5 @@
-﻿using CasaEmpeñoService.ProductService;
+﻿using CasaEmpeño.Filters;
+using CasaEmpeñoService.ProductService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CasaEmpeño.Controllers
 {
+    [SessionFilter]
     public class TipoProductoController : Controller
     {
         private readonly ProductTypeService _productTypeService;

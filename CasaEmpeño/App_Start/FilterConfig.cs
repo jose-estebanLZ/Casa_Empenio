@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using CasaEmpeño.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CasaEmpeño
@@ -8,6 +9,7 @@ namespace CasaEmpeño
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new SessionFilter());
         }
     }
 }

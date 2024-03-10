@@ -1,4 +1,5 @@
-﻿using CasaEmpeñoService.ProductStatusService;
+﻿using CasaEmpeño.Filters;
+using CasaEmpeñoService.ProductStatusService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CasaEmpeño.Controllers
 {
+    [SessionFilter]
     public class EstadoProductoController : Controller
     {
         private readonly ProductStatusService _productStatusService;

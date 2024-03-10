@@ -1,4 +1,5 @@
-﻿using CasaEmpeñoModel.ViewModels;
+﻿using CasaEmpeño.Filters;
+using CasaEmpeñoModel.ViewModels;
 using CasaEmpeñoService.ProductService;
 using CasaEmpeñoService.ProductStatusService;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CasaEmpeño.Controllers
 {
+    [SessionFilter]
     public class ProductoController : Controller
     {
         private readonly ProductService _productService;
